@@ -101,6 +101,12 @@ class Application extends PropertyObject
       on_error: _G.log.error
     }
 
+    signal.connect 'after-buffer-switch', (sig_args) ->
+      title = "Howl"
+      if sig_args.editor.buffer and sig_args.editor.buffer.title
+        title = "Howl - #{sig_args.editor.buffer.title}"
+      howl.app.window.win.title = title
+
     signal.connect 'log-entry-appended', (entry) ->
       level = entry.level
       message = entry.message
